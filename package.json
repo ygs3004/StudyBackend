@@ -13,6 +13,7 @@
   "private": true,
   "dependencies": {
     "amqplib": "^0.10.5",
-    "express": "^4.21.1"
+    "express": "^4.21.1",
+    "websocket": "^1.0.35"
   }
 }
