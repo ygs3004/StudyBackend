@@ -12,6 +12,8 @@
   },
   "private": true,
   "dependencies": {
+    "@grpc/grpc-js": "^1.12.4",
+    "@grpc/proto-loader": "^0.7.13",
     "amqplib": "^0.10.5",
     "express": "^4.21.1",
     "websocket": "^1.0.35"
