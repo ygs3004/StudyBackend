@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Real-Time Communication</title>
+    <script>
+        const lc = new RTCPeerConnection();
+        const dc = lc.createDataChannel("channel");
+        dc.onmessage = e => console.log(`From Answer Message :${e.data}`);
+        dc.onopen = e => console.log(`Connection Open`);
+        lc.onicecandidate = e => console.log(`New Ice Candidate. reprinting SDP: ${JSON.stringify(lc.localDescription)}`);
+        lc.createOffer().then(o => lc.setLocalDescription(o)).then( a => console.log("set successfully!"));
+
+        const answer = "answer"; // 응답 받은 answer 연결정보
+        lc.setRemoteDescription(answer);
+        dc.send("Hello answer");
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Real-Time Communication</title>
+    <script>
+        const offer = "offer"; // offer 에서 생성된 연결정보
+        const rc = new RTCPeerConnection();
+        rc.onicecandidate = e => console.log(`New Ice Candidate. reprinting SDP: ${JSON.stringify(rc.localDescription)}`);
+        rc.ondatachannel =  e => {
+            rc.dc = e.channel; // data channel
+            rc.dc.onmessage = e => console.log(`From Offer Message: ${e.data}`)
+            rc.dc.onopen = e => console.log(`Connection Open`);
+        }
+        rc.setRemoteDescription(offer).then(a => console.log("offer set"));
+        rc.createAnswer().then (a => rc.setLocalDescription(a)).then(a => console.log(`answer created`))
+
+        rc.dc.send("Hello offer");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
